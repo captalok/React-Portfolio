@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -10,7 +11,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
+  };  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +26,9 @@ const Login = () => {
     }
 
     try {
+      // Fixed: Using API_BASE_URL instead of localhost
       const response = await axios.post(
-        'http://localhost:5000/api/login', 
+        `${API_BASE_URL}/api/login`, 
         credentials,
         { timeout: 5000 }
       );
