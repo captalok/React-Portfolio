@@ -168,7 +168,10 @@ const Home = () => {
               </h3>
             </div>
             <div className="p-6 grid grid-cols-1 gap-3">
-              <button className="text-left bg-gray-700/50 hover:bg-gray-700 transition-all duration-300 py-3 px-4 rounded-lg border-l-4 border-green-500 flex items-center">
+              <button 
+                onClick={() => navigate('/trade')}
+                className="text-left bg-gray-700/50 hover:bg-gray-700 transition-all duration-300 py-3 px-4 rounded-lg border-l-4 border-green-500 flex items-center"
+              >
                 <svg className="w-5 h-5 mr-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                 </svg>

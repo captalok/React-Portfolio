@@ -1,5 +1,7 @@
-const mysql = require('mysql2');
-require('dotenv').config();
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -22,7 +24,7 @@ pool.getConnection((err, connection) => {
 });
 
 // Promisified query method
-const query = (sql, values) => {
+export const query = (sql, values) => {
   return new Promise((resolve, reject) => {
     pool.query(sql, values, (err, results) => {
       if (err) return reject(err);
@@ -31,4 +33,5 @@ const query = (sql, values) => {
   });
 };
 
-module.exports = { pool, query };
+// Export pool as well if needed elsewhere
+export const getPool = () => pool;

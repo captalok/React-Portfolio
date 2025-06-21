@@ -1,10 +1,10 @@
-const express = require('express');
+import { query } from '../config/db.js';
+import express from 'express';
+
 const router = express.Router();
-const { query } = require('../config/db');
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  console.log(`Login attempt: ${username}`);
   
   if (!username || !password) {
     return res.status(400).json({ 
@@ -19,17 +19,12 @@ router.post('/login', async (req, res) => {
       [username, password]
     );
     
-    console.log(`Query results: ${results.length} matches`);
-    
     if (results.length > 0) {
-      console.log(`✅ Login successful for: ${username}`);
       res.json({ success: true, user: results[0] });
     } else {
-      console.log('❌ Invalid credentials');
       res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
   } catch (error) {
-    console.error('🚨 Database error:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Database error',
@@ -38,4 +33,5 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router;
+// Export the router as default
+export default router;
